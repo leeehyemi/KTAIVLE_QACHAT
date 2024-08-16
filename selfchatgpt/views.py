@@ -137,7 +137,7 @@ def process_batch(batch):
     new_list = []
     for question in batch:    
         score = database.similarity_search_with_score(question, k=1)
-        if score and score[0][1] < 0.3:
+        if score and score[0][1] > 0.3:
             new_list.append(Document(page_content=question))
             faq.objects.create(answer=question)
             
