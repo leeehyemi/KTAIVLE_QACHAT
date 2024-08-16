@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django</title>
+    <link rel="stylesheet" href="{% static 'base1.css' %}">
+ 
+    {% block extrahead %}
+    {% endblock %}
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="/">홈</a></li>
+                    <li><a href="/admin/selfchatgpt/chathistory/">ADMIN</a></li>
+                    <li><a href="{% url 'selfchatgpt:upload_csv' %}">업로드</a></li>
+                    <li><a href="{% url 'selfchatgpt:faq_list' %}">Vector DB</a></li>
+                    <li><a href="{% url 'selfchatgpt:history_list' %}">채팅 기록</a></li>
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'signup' %}">회원 가입 </a> </li>
+                        <li><a href="{% url 'login' %}?next={{request.path}}">로그인</a></li>
+                    {% else %}
+                        <li><a href="{% url 'profile' %}">{{user}}님</a> </li>
+                        <li><a href="{% url 'profile' %}">내정보</a> </li>
+                        <li>
+                            <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="logout-button">로그 아웃</button>
+                                <input type="hidden" name="next" value="{{ request.path }}">
+                            </form>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+            <p><a id="consultation-link" href="/selfchatgpt/"> Chat Start </a></p>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    // 상담 링크 클릭 시 동작하는 함수
+                    function handleConsultationLinkClick(event) {
+                        // 사용자가 로그인되어 있는지 확인
+                        if (!userIsLoggedIn()) {
+                            // 로그인 페이지로 이동
+                            window.location.href = "/accounts/login/?next=/selfchatgpt/";
+                            // 링크 클릭의 기본 동작을 막음 (페이지 이동 방지)
+                            event.preventDefault();
+                        }
+                    }
+               
+                    // 상담 링크 요소를 선택
+                    var consultationLink = document.querySelector("#consultation-link");
+                    // 상담 링크 클릭 이벤트에 대한 이벤트 리스너 추가
+                    consultationLink.addEventListener("click", handleConsultationLinkClick);
+               
+                    // 사용자가 로그인되어 있는지 확인하는 함수
+                    function userIsLoggedIn() {
+                        // Django 템플릿에서 제공하는 user.is_authenticated 값을 사용하여 사용자의 로그인 상태를 확인
+                        var loggedIn = {{ user.is_authenticated|lower }};
+                        return loggedIn;
+                    }
+                });
+            </script>
+        <footer>
+            <p>Copyright © 2024 AIVLE Team 4 All Right Reserved</p>
+        </footer>
+    </body>
+</html>

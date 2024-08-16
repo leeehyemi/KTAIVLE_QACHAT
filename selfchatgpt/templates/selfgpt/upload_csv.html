@@ -1,0 +1,149 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<div class="container d-flex flex-column align-items-center">
+    <div class="row justify-content-center"> <!-- Center the form horizontally -->
+        <div class="col-md-8"> <!-- Adjust the size of the form -->
+            <h1>Upload CSV File</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.csv_file.label_tag }}
+                    {{ form.csv_file }}
+                </div>
+                <button type="submit" class="btn btn-primary" id="upload">Upload</button>
+            </form>
+            {% if messages %}
+                <div class="alert-container mt-4">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div> 
+</div>
+
+<style>
+    @font-face {
+        font-family: 'KCC-Hanbit';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    html {
+        font-family: 'KCC-Hanbit';
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #343a40;
+        font-family: 'KCC-Hanbit';
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    
+    .form-group {
+        width: 100%;
+    }
+    
+    input[type="file"] {
+        display: block;
+        width: 100%;
+        padding: 200px;
+        margin-bottom: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+    }
+
+    #upload {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    #upload:hover {
+        background-color: #0056b3;
+    }
+    
+    .alert-container {
+        margin-top: 20px;
+    }
+    
+    .alert {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 4px;
+    }
+    
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+    
+    .logout-button {
+        background: none;
+        border: none;
+        font: inherit;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 1.4rem 1.5rem;
+        text-align: center;
+    }
+    .navbar {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .navbar li {
+        margin: 0 1rem;
+    }
+    
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .navbar a:hover {
+        text-decoration: underline;
+    }
+    
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100vh - 60px);
+    }
+    
+    .img-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .img {
+        max-height: 150px;
+    }
+</style>
+{% endblock %}

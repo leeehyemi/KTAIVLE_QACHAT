@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="{% static 'sgpt/styles2.css'%}">
+    {% block extrahead %}
+    {% endblock %}
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header-icons">
+            <a href="/" id="back-button">
+                <img src="{% static 'sgpt/back.png' %}">
+            </a>
+            <img src="{% static 'sgpt/battery.png' %}" class="battery-icon">
+            <img src="{% static 'sgpt/signal.png' %}" class="signal-icon">
+            <div id="clock" class="clock"></div> 
+        </div>
+        <header class="chat-header">
+            <div class="chat-header-content">
+                <img src="{% static 'sgpt/ai-icon.png' %}" alt="KT Icon" class="chat-icon">
+                <div>
+                    <div class="chat-title">KT AIVLE Q&A</div>
+                    <div class="chat-status"><span class="status-dot"></span>Online</div>
+                </div>
+            </div>
+        </header>
+        <div class="chat-box" id="chat-box"></div>
+        <form id="chat-form">
+            {% csrf_token %}
+            <input type="text" id="question" name="question" placeholder="질문을 입력해주세요." required>
+            <button type="submit" class="send-btn">
+                <img src="{% static 'sgpt/send-icon.png' %}" alt="Send">
+            </button>
+            <button type="button" id="refresh-button">
+                <img src="{% static 'sgpt/reset.png' %}" alt="Send">
+            </button>
+        </form>
+    </div>
+    <script>
+        // 새로고침 버튼에 클릭 이벤트 추가
+        document.getElementById('refresh-button').addEventListener('click', function() {
+            location.reload(); // 페이지 새로고침
+        });
+
+        // 실시간 시계 업데이트 함수
+        function updateClock() {
+            const clockElement = document.getElementById('clock');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // 1초마다 시계 업데이트
+        setInterval(updateClock, 1000);
+        updateClock(); // 페이지 로드 시 즉시 시계 업데이트
+
+        // 폼 제출 시 질문을 AJAX로 서버에 보내고 서버에 받은 응답을 채팅 박스에 표시
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // 페이지의 새로고침을 막는다.
+            const chatBox = document.getElementById('chat-box');
+            const question = document.getElementById('question').value;
+
+            // 현재 시간 가져와서 사용자 메시지에 추가
+            const currentTime = new Date().toLocaleString('ko-KR');
+
+            // 사용자 질문 추가
+            chatBox.innerHTML +=
+            `<div class="chat-message user-message">
+                <div class="message-bubble">${question}</div>
+                <div class="message-time">${currentTime}</div>
+            </div>`;
+
+            //fetch : 서버에 post 요청 (비동기 요청)
+            fetch("{% url 'selfchatgpt:chat' %}", {
+                method: "POST",
+                headers: {
+                    // 데이터가 url 인코딩된 키-값 쌍으로 인코딩되어 서버에 전송
+                    // CSRF 토큰을 AJAX 요청의 헤더에 포함시켜 서버에서 CSRF 공격을 방지
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: new URLSearchParams({
+                    // form 데이터를 url 인코딩된 문자열로 전송
+                    'question': question
+                })
+            })
+            // 응답을 JSON 형식으로 파싱
+            .then(response => response.json())
+            // 파싱된 데이터를 사용해서 서버 응답 메시지 채팅 박스에 추가
+            .then(data => {
+                chatBox.innerHTML +=
+                `<div class="chat-message ai-message">
+                    <img src="{% static 'sgpt/ai-icon.png' %}" alt="ai icon" class="message-icon">
+                    <div class="message-bubble">${data.result}</div>
+                    <div class="message-time">${data.datetime}</div>
+                </div>`;
+                // 답변을 표시하고 채팅 박스 자동 스크롤
+                chatBox.scrollTop = chatBox.scrollHeight;
+                document.getElementById('question').value = ''; //질문칸 비우기
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+@font-face {
+    font-family: 'KCC-Hanbit';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.button-spacing {
+    margin-right: 100px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'KCC-Hanbit', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.chat-header {
+    background-color: steelblue;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-bottom: none;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    background-color: #d1e7dd;
+    /* align-self: flex-end; */
+    font-weight: bold;
+    text-align: right; /* 글자 오른쪽 정렬*/
+    font-family: 'KCC-Hanbit';
+}
+
+.ai-message {
+    background-color: #f8d7da;
+    background: lightgray;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: left; /* 글자 왼쪽 정렬*/
+    font-family: 'KCC-Hanbit';
+}
+
+#chat-form {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+textarea {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 0 0 0 10px;
+    resize: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: steelblue;
+    color: white;
+    border: none;
+    border-radius: 0 0 10px 0;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #4682b4;
+}
+
+@media (max-width: 600px) {
+    .chat-container {
+        border-radius: 0;
+        height: 100vh;
+    }
+
+    .chat-header {
+        border-radius: 0;
+    }
+
+    textarea {
+        border-radius: 0;
+    }
+
+    button {
+        border-radius: 0;
+    }
+}

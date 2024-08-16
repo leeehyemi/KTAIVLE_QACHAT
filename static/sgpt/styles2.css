@@ -1,0 +1,256 @@
+@font-face {
+    font-family: 'KCC-Hanbit';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    width: 860px;
+    margin: 0;
+    padding: 0;
+    font-family: 'KCC-Hanbit', sans-serif;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f6fa;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'KCC-Hanbit', sans-serif;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f5f6fa;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 400px;
+    height: 80vh;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: #ffffff;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.chat-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column; /* 열 방향으로 요소 배치 */
+    gap: 10px; /* 요소 사이의 간격 */
+}
+
+.chat-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.chat-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #3b3b3b;
+    text-align: center;
+    margin: auto; /* 수평 가운데 정렬을 위한 자동 마진 설정 */
+}
+
+.chat-status {
+    font-size: 0.9rem;
+    color: #00c853;
+    margin-top: 5px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #00c853;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.chat-settings-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.chat-settings-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chat-message {
+    display: flex;
+    flex-direction: column; 
+    gap: 5px; 
+}
+
+.user-message {
+    justify-content: flex-end;
+    text-align: right;
+    align-self: flex-end;
+}
+
+.user-message .message-bubble {
+    background: #307aff;
+    color: #ffffff;
+}
+
+.ai-message {
+    justify-content: flex-start;
+    text-align: left;
+    align-self: flex-start;
+}
+
+.ai-message .message-bubble {
+    background: #e0e0e0;
+    color: #333333;
+}
+
+.message-bubble {
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: #999; 
+}
+
+.message-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+#chat-form {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #ffffff;
+    border-top: 1px solid #f0f0f0;
+    gap: 10px;
+}
+
+#chat-form {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #ffffff;
+    border-top: 1px solid #f0f0f0;
+    gap: 10px;
+}
+
+#chat-form input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #dfe1e5;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#chat-form input:focus {
+    border-color: #307aff;
+}
+
+.send-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 5px; /* send 버튼을 아래로 내리는 마진 설정 */
+}
+
+.send-btn img {
+    width: 25px;
+    height: 25px;
+}
+
+#refresh-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 5px;
+}
+
+#refresh-button img {
+    width: 25px;
+    height: 25px;
+}
+
+#back-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 5px;
+    float: left; /* 왼쪽으로 붙이기 */
+    margin-right: 10px; /* 아이콘과의 간격 설정 */
+}
+
+#back-button img {
+    width: 30px;
+    height: 30px;
+}
+
+.signal-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+    float: right; 
+    margin-right: 10px; /* 아이콘과의 간격 설정 */
+    width: 28px;
+}
+
+.battery-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+    float: right; 
+    margin-right: 10px; /* 아이콘과의 간격 설정 */
+    width: 30px;
+}
+
+.clock {
+    margin-left: 165px;
+    margin-top: 12px;
+    font-size: 16px;
+}
+
+@media (max-width: 400px) {
+    .chat-container {
+        height: 90vh;
+    }
+}

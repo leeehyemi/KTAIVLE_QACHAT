@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'KCC-Hanbit';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+html {
+    height: 100%;
+}
+ 
+body {
+    font-family: 'KCC-Hanbit';
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: black;
+    background-image: url('sgpt/background.png');
+    background-size: cover; /* 이미지가 화면에 꽉 차게 */
+    background-position: center; /* 이미지가 중앙에 위치하게 */
+    background-repeat: no-repeat; /* 이미지가 반복되지 않게 */
+    background-attachment: fixed; /* 스크롤 시 이미지 고정 */
+    height: 100%;
+}
+ 
+header {
+    background-color: white;
+    color: black;
+    padding: 1rem 0;
+    text-align: center;
+}
+ 
+header h1 {
+    margin: 0;
+}
+ 
+header h2 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: normal;
+}
+ 
+.navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+ 
+.navbar li {
+    margin: 0 1rem;
+}
+ 
+.navbar a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+ 
+.navbar a:hover {
+    text-decoration: underline;
+}
+ 
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+ 
+main section {
+    margin-bottom: 2rem;
+}
+ 
+main section h2 {
+    color: black;
+    border-bottom: 2px solid black;
+    padding-bottom: 0.5rem;
+}
+ 
+main section p {
+    font-size: 1.1rem;
+}
+ 
+main a {
+    color: gray;
+    text-decoration: none;
+}
+ 
+main a:hover {
+    text-decoration: underline;
+}
+ 
+footer {
+    background-color: whitesmoke;
+    color: black;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+   
+}
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+}
+ 
+footer {
+    padding: 0;
+}
+ 
+#consultation-link {
+    border: solid 3px;
+    border-radius: 10px;
+    color: black;
+    padding: 2px;
+    position: fixed;
+    top: 75%; /* Footer 위로 약간의 여백 */
+    left: 28%;
+    transform: translateX(-60%);
+    width:100px;
+    text-align: center;
+    text-decoration: none;
+}

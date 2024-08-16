@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KT AIVLE QA</title>
+    <link rel="stylesheet" href="{% static 'sgpt/style1.css' %}">
+    {% block extrahead %}
+    {% endblock %}
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            KT AIVLE Q&A
+        </div>
+        <div class="chat-box" id="chat-box">
+        </div>
+        <form id="chat-form">
+            {% csrf_token %}
+            <textarea id="question" name="question" placeholder="질문을 입력하세요."></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const chatBox = document.getElementById('chat-box');
+            const question = document.getElementById('question').value;
+
+            // 사용자의 메시지 추가
+            chatBox.innerHTML += '<div class="chat-message user-message">' + question + '</div>';
+            
+            // AJAX를 사용하여 서버에 요청
+            fetch("{% url 'selfchatgpt:chat' %}", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: new URLSearchParams({
+                    'question': question
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // 서버에서 받은 응답을 추가
+                chatBox.innerHTML += '<div class="chat-message ai-message">' + data.result + '</div>';
+                chatBox.scrollTop = chatBox.scrollHeight;
+                document.getElementById('question').value = '';
+            });
+        });
+    </script>
+</body>
+</html>

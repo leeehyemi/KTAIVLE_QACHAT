@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="profile-container">
+    <img src ='https://www.studiopeople.kr/common/img/default_profile.png' style = "width:150px;">
+    <h1>{{ user }}님</h1>
+    <ul>
+        <li>이름: {{ user }}</li>
+        <li>이메일: {{ user.email }}</li>
+        <li>전화번호: {{ user.profile.phone_number }}</li>
+        <li>주소: {{ user.profile.address }}</li>
+        <li>가입일: {{ user.date_joined }}</li>
+    </ul>
+    <a href="{% url 'password_change' %}">[암호 변경하기]</a>
+</div>
+
+<style>
+@font-face {
+    font-family: 'KCC-Hanbit';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/KCC-Hanbit.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.profile-container {
+    background-color: white;
+    font-size:20px;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'KCC-Hanbit';
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 60px); /* Adjust height to account for fixed navbar */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 0.5rem 0;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a {
+    color: gray;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+}
+
+footer {
+    background-color: steelblue;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+</style>
+{% endblock %}
