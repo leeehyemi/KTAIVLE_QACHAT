@@ -15,7 +15,7 @@ KT AIVLE 지원자들을 위한 QA Chatbot 사이트 입니다. <br>
 <img src="https://github.com/user-attachments/assets/36aee01f-077d-4514-b389-570635e1eb30"  width="500" height="200"/> <br>
 <img src="https://github.com/user-attachments/assets/ddc8dba0-4004-4bed-8be8-338e0fb7dff4"  width="600" height="400"/>
 
--> 기존의 vector db와 유사도 비교 후 유사도가 0.3 이하이면 vector db에 추가
+-> 기존의 vector db와 유사도 비교 후 유사도가 0.3보다 크면 vector db에 추가
 
 ### 관리자 페이지
 - 채팅 기록 확인
